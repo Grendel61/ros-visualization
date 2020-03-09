@@ -6,10 +6,10 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
 [![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
 `Grendel61/ros-visualization:mdgt`: 
 (mgdt: Melodic-Desktop Gazebo Tensorflow)
-* Ubuntu 18.04
+* Ubuntu 18.04 with Desktop
 * VNC/No-VNC on Ports: 5901/6901
 * XFCE Window Manager
-* ROS Melodic Desktop Full:
+* ROS Melodic-Desktop-Full:
   * ROS Melodic: tutorials cmake, ros-built-toools, ros-melodic catkin, etc. 
   * RQT
   * RVIZ
