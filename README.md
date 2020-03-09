@@ -3,36 +3,39 @@
 This repository builds an Ubuntu environment for developing and visualizing Robot Operating System (ROS) worlds. 
 
 ## Current Build:
-* Ubuntu 18.04
+* dmgt Ubuntu 18.04
 
 ## Latest Image Build:
-`Grendel61/ros-visualization:latest`:
+`Grendel61/ros-visualization:mgdt`:
 * __Ubuntu 18.04
 * VNC/No-VNC on Ports: 5901/6901
-*  with `ROS Melodic + Gazebo 9`__
-
-  [![](https://images.microbadger.com/badges/version/henry2423/ros-vnc-ubuntu:melodic.svg)](https://hub.docker.com/r/henry2423/ros-vnc-ubuntu/) [![](https://images.microbadger.com/badges/image/henry2423/ros-vnc-ubuntu:melodic.svg)](https://microbadger.com/images/henry2423/ros-vnc-ubuntu:melodic)
-
-## Spec
-This is a Docker environmentalist equipped with ROS, Gazebo, xfce-vnc, no-vnc(http vnc service) and TensorFlow-gpu.
-The container is developed under xfce-docker-container source and add the ROS, TensorFlow GPU environment on top of it, to provide a essential kit for anyone who develop with robotic and deep learning.
+* XFCE Window Manager
+* ROS Melodic Desktop Full includes:
+      * ROS Melodic: tutorials cmake, ros-built-toools, ros-melodic catkin, etc. 
+      * RQT
+      * RVIZ
+      * Robot Generic Libraries
+      * 2D/3D simulaters and perception
+* ROS Gazebo 9
+* Tensorflow GPU
+[![](https://images.microbadger.com/badges/image/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
 
 ## Usage
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
-      docker run -d -p 5901:5901 -p 6901:6901 henry2423/ros-vnc-ubuntu:kinetic
+      docker run -d -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mgdt
 
 - If you want to get into the container use interactive mode `-it` and `bash`
       
-      docker run -it -p 5901:5901 -p 6901:6901 henry2423/ros-vnc-ubuntu:kinetic bash
+      docker run -it -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mgdt bash
 
 - If you want to connect to tensorboard, run command with mapping to local port `6006`:
       
-      docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 henry2423/ros-vnc-ubuntu:kinetic
+      docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mgdt
 
 - Build an image from scratch:
 
-      docker build -t henry2423/ros-vnc-ubuntu:kinetic .
+      docker build -t grendel61/ros-visualization:mgdt .
 
 ## Connect & Control
 If the container runs up, you can connect to the container throught the following 
@@ -46,14 +49,14 @@ If the container runs up, you can connect to the container throught the followin
 
 #### 1.1) Using root (user id `0`)
 Add the `--user` flag to your docker run command:
-
-    docker run -it --user root -p 5901:5901 henry2423/ros-vnc-ubuntu:kinetic
-
+```
+    docker run -it --user root -p 5901:5901 grendel61/ros-visualization:mgdt
+```
 #### 1.2) Using user and group id of host system
 Add the `--user` flag to your docker run command (Note: uid and gui of host system may not able to map with container, which is 1000:1000. If that is the case, check with 3):
-
-    docker run -it -p 5901:5901 --user $(id -u):$(id -g) henry2423/ros-vnc-ubuntu:kinetic
-
+```
+    docker run -it -p 5901:5901 --user $(id -u):$(id -g) grendel61/ros-visualization:mgdt
+```
 ### 2) Override VNC and Container environment variables
 The following VNC environment variables can be overwritten at the `docker run` phase to customize your desktop environment inside the container:
 * `VNC_COL_DEPTH`, default: `24`
@@ -65,39 +68,46 @@ The following VNC environment variables can be overwritten at the `docker run` p
 #### 2.1) Example: Override the VNC password
 Simply overwrite the value of the environment variable `VNC_PW`. For example in
 the docker run command:
-
-    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_PW=vncpassword henry2423/ros-vnc-ubuntu:kinetic
-
+```
+    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_PW=vncpassword grendel61/ros-visualization:mgdt
+```
 #### 2.2) Example: Override the VNC resolution
 Simply overwrite the value of the environment variable `VNC_RESOLUTION`. For example in
 the docker run command:
-
-    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 henry2423/ros-vnc-ubuntu:kinetic
-
-### 3) Mounting local directory to conatiner
+```
+    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mgdt
+```
+### 3) Mounting local directory to container
 You should run with following environment variable in order to mapping host user/group with container, and retrieve R/W permission of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
-
+```
       docker run -it -p 5901:5901 \
         --user $(id -u):$(id -g) \
         --volume /etc/passwd:/etc/passwd \
         --volume /etc/group:/etc/group \
         --volume /etc/shadow:/etc/shadow \
         --volume /home/ros/Desktop:/home/ros/Desktop:rw \
-        henry2423/ros-vnc-ubuntu:kinetic
-
+        grendel61/ros-visualization:mgdt
+```
+You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
+```
+      docker run -it --rm -p 5901:5901 -p 6901:6901 \
+      -e VNC_PW=vncpassword \
+      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
+      grendel61/ros-visualization:mgdt
+```
 ### 4) Connecting jupyter notebook within container
 - Run command with mapping to local port `8888` (jupyter protocol) and `8888` (host web access):
-
-      docker run -d -p 8888:8888 henry2423/ros-vnc-ubuntu:kinetic
-
+```
+      docker run -d -p 8888:8888 grendel61/ros-visualization:mgdt
+```
 - Check your local IP within container using `` $ifconfig``, then you can start up jupyter notebook in container with following command: 
-
+```
       jupyter notebook --ip={YOUR CONTAINER IP} --port=8888 --allow-root
-
+```
 - After start up the jupyter kernel, you can access the notebook from host browser through HTTP service.
-
+```
       http://localhost:8888/
-
+```
 ## Contributors
 
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
