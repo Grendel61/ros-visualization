@@ -1,6 +1,6 @@
-# Containerized ROS Visualization environment 
+# Containerized ROS Visualization and Development environment 
 
-This repository builds an Ubuntu environment capabable of visualizing Robot Operating System (ROS) worlds. 
+This repository builds an Ubuntu environment for developing and visualizing Robot Operating System (ROS) worlds. 
 
 ## Current Build:
 * Ubuntu 18.04
