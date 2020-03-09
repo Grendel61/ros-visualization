@@ -3,7 +3,10 @@
 This repository builds an Ubuntu environment for developing and visualizing Robot Operating System (ROS) worlds. 
 
 ## Current Build:
-`Grendel61/ros-visualization:mdgt`: [![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
+`Grendel61/ros-visualization:mdgt`: 
+
+[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
+
 (mgdt: Melodic-Desktop Gazebo Tensorflow)
 * __Ubuntu 18.04
 * VNC/No-VNC on Ports: 5901/6901
