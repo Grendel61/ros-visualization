@@ -1,9 +1,9 @@
 # This Dockerfile is used to build an ROS + VNC + Tensorflow image based on Ubuntu 18.04
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM ubuntu
 
-LABEL maintainer "Henry Huang"
-MAINTAINER Henry Huang "https://github.com/henry2423"
-ENV REFRESHED_AT 2018-10-29
+LABEL maintainer "Ed Fullman"
+LABEL Ed Fullman "https://github.com/Grendel61"
+ENV REFRESHED_AT 2020-03-04
 
 # Install sudo
 RUN apt-get update && \
@@ -29,14 +29,6 @@ RUN groupadd $USER && \
     usermod  --uid $UID $USER && \
     groupmod --gid $GID $USER
 
-### Install VScode
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
-    sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/ && \
-    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-RUN sudo apt-get install -y apt-transport-https && \
-    sudo apt-get update && \
-    sudo apt-get install -y code
 
 ### VNC Installation
 LABEL io.k8s.description="VNC Container with ROS with Xfce window manager" \
@@ -66,6 +58,8 @@ ENV HOME=/home/$USER \
     VNC_PW=$VNCPASSWD \
     VNC_VIEW_ONLY=false
 WORKDIR $HOME
+
+RUN apt-get clean
 
 ## Add all install scripts for further steps
 ADD ./src/common/install/ $INST_SCRIPTS/
@@ -102,18 +96,26 @@ RUN apt-get update && \
     git
 
 # Install ROS
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list' && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116 && \
-    apt-get update && apt-get install -y ros-melodic-desktop && \
-    apt-get install -y python-rosinstall && \
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
+    apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
+    apt-get update && \
+    apt-get install -y ros-melodic-desktop-full && \
     rosdep init
+
+USER $USER
+RUN rosdep update
+
+USER root
+## Install Dependencies
+RUN apt-get install -y python-rosinstall python-rosinstall-generator python-wstool build-essential
 
 # Install Gazebo
 RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' && \
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add - && \
     apt-get update && \
-    apt-get install -y gazebo9 libgazebo9-dev && \
+    apt-get install -y gazebo9 libgazebo9-dev &&\
     apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
+
 
 # Setup ROS
 USER $USER
@@ -122,16 +124,9 @@ RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
 
 ###Tensorflow Installation
-# Install pip
 USER root
-RUN apt-get install -y wget python-pip python-dev libgtk2.0-0 unzip libblas-dev liblapack-dev libhdf5-dev && \
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python get-pip.py
-
-# prepare default python 2.7 environment
-USER root
-RUN pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.11.0-cp27-none-linux_x86_64.whl && \
-    pip install keras==2.2.4 matplotlib pandas scipy h5py testresources scikit-learn
+RUN apt-get install -y python3-dev python3-pip  && \
+    pip3 install --user --upgrade tensorflow
 
 # Expose Tensorboard
 EXPOSE 6006
@@ -139,7 +134,10 @@ EXPOSE 6006
 # Expose Jupyter 
 EXPOSE 8888
 
-### Switch to root user to install additional software
+# Update links
+RUN apt upgrade -y
+
+### Switch back to user
 USER $USER
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]

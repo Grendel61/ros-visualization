@@ -1,17 +1,15 @@
-# Docker container images with ROS, Gazebo, Xfce4 VNC Desktop and Tensorflow
+# Containerized ROS Visualization environment 
 
-This repository developed from ConSol/docker-headless-vnc-container, with provide the headless VNC environments for docker container
+This repository builds an Ubuntu environment capabable of visualizing Robot Operating System (ROS) worlds. 
 
-## Current Image Build:
-* `henry2423/ros-vnc-ubuntu:kinetic` : __Ubuntu 16.04 with `ROS Kinetic + Gazebo 8`__
+## Current Build:
+* Ubuntu 18.04
 
-  [![](https://images.microbadger.com/badges/version/henry2423/ros-vnc-ubuntu:kinetic.svg)](https://hub.docker.com/r/henry2423/ros-vnc-ubuntu/) [![](https://images.microbadger.com/badges/image/henry2423/ros-vnc-ubuntu:kinetic.svg)](https://microbadger.com/images/henry2423/ros-vnc-ubuntu:kinetic)
-
-* `henry2423/ros-vnc-ubuntu:lunar` : __Ubuntu 16.04 with `ROS Lunar + Gazebo 9`__
-
-  [![](https://images.microbadger.com/badges/version/henry2423/ros-vnc-ubuntu:lunar.svg)](https://hub.docker.com/r/henry2423/ros-vnc-ubuntu/) [![](https://images.microbadger.com/badges/image/henry2423/ros-vnc-ubuntu:lunar.svg)](https://microbadger.com/images/henry2423/ros-vnc-ubuntu:lunar)
-
-* `henry2423/ros-vnc-ubuntu:melodic`: __Ubuntu 18.04 with `ROS Melodic + Gazebo 9`__
+## Latest Image Build:
+`Grendel61/ros-visualization:latest`:
+* __Ubuntu 18.04
+* VNC/No-VNC on Ports: 5901/6901
+*  with `ROS Melodic + Gazebo 9`__
 
   [![](https://images.microbadger.com/badges/version/henry2423/ros-vnc-ubuntu:melodic.svg)](https://hub.docker.com/r/henry2423/ros-vnc-ubuntu/) [![](https://images.microbadger.com/badges/image/henry2423/ros-vnc-ubuntu:melodic.svg)](https://microbadger.com/images/henry2423/ros-vnc-ubuntu:melodic)
 
@@ -103,3 +101,4 @@ You should run with following environment variable in order to mapping host user
 ## Contributors
 
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
+* [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc)
