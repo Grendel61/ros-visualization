@@ -18,8 +18,6 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
 * ROS Gazebo 9
 * Tensorflow GPU
 
-[![](https://images.microbadger.com/badges/image/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own image badge on microbadger.com")
-
 ## Usage
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
