@@ -38,14 +38,14 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
       docker build -t grendel61/ros-visualization:mdgt .
 
 ## Connect & Control
-If the container runs up, you can connect to the container throught the following 
-* connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
-* connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
-* connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
-* connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
+To connect the Ubuntu Desktop:
+* Connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
+* Connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
+* Connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
+* Connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
 * The default username and password in container is ros:ros
 
-## Detail Environment setting
+## Detail Docker Run settings
 
 #### 1.1) Using root (user id `0`)
 Add the `--user` flag to your docker run command:
@@ -77,8 +77,10 @@ the docker run command:
 ```
     docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mdgt
 ```
-### 3) Mounting local directory to container
-You should run with following environment variable in order to mapping host user/group with container, and retrieve R/W permission of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
+### 3) Mount a local directory to the container
+You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. 
+
+### 3.1) Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
 ```
       docker run -it -p 5901:5901 \
         --user $(id -u):$(id -g) \
@@ -88,7 +90,7 @@ You should run with following environment variable in order to mapping host user
         --volume /home/ros/Desktop:/home/ros/Desktop:rw \
         grendel61/ros-visualization:mdgt
 ```
-You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
+### 3.2) You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
 ```
       docker run -it --rm -p 5901:5901 -p 6901:6901 \
       -e VNC_PW=vncpassword \
@@ -108,6 +110,10 @@ You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This wil
 ```
       http://localhost:8888/
 ```
+### 5) Run Gazebo
+- From a terminal window, start the container with a `docker run ... `
+- From inside the container, enter in the command line `gazebo`
+
 ## Contributors
 
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
