@@ -80,7 +80,7 @@ the docker run command:
 ### 3) Mount a local directory to the container
 You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. 
 
-### 3.1) Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
+#### 3.1) Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
 ```
       docker run -it -p 5901:5901 \
         --user $(id -u):$(id -g) \
@@ -90,7 +90,7 @@ You can settings to the run to connect a local directory which will receive new 
         --volume /home/ros/Desktop:/home/ros/Desktop:rw \
         grendel61/ros-visualization:mdgt
 ```
-### 3.2) You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
+#### 3.2) You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
 ```
       docker run -it --rm -p 5901:5901 -p 6901:6901 \
       -e VNC_PW=vncpassword \
