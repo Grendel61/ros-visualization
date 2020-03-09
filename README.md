@@ -33,12 +33,9 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
       
       docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgt
 
-- Build an image from scratch:
-
-      docker build -t grendel61/ros-visualization:mdgt .
-
 ## Connect & Control
 To connect the Ubuntu Desktop:
+
 * Connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
 * Connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
 * Connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
