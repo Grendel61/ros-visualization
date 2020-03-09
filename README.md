@@ -2,21 +2,19 @@
 
 This repository builds an Ubuntu environment for developing and visualizing Robot Operating System (ROS) worlds. 
 
-## Current Build:
-`Grendel61/ros-visualization:mdgt`: 
-
+## Build: 
 [![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
-
+`Grendel61/ros-visualization:mdgt`: 
 (mgdt: Melodic-Desktop Gazebo Tensorflow)
-* __Ubuntu 18.04
+* Ubuntu 18.04
 * VNC/No-VNC on Ports: 5901/6901
 * XFCE Window Manager
 * ROS Melodic Desktop Full:
-      * ROS Melodic: tutorials cmake, ros-built-toools, ros-melodic catkin, etc. 
-      * RQT
-      * RVIZ
-      * Robot Generic Libraries
-      * 2D/3D simulaters and perception
+  * ROS Melodic: tutorials cmake, ros-built-toools, ros-melodic catkin, etc. 
+  * RQT
+  * RVIZ
+  * Robot Generic Libraries
+  * 2D/3D simulaters and perception
 * ROS Gazebo 9
 * Tensorflow GPU
 
