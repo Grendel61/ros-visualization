@@ -91,7 +91,7 @@ RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
 ### ROS and Gazebo Installation
 # Install other utilities
 RUN apt-get update && \
-    apt-get install -y vim \
+    apt-get install -y vim apt-utils \
     tmux \
     git
 
@@ -123,10 +123,41 @@ RUN rosdep fix-permissions && rosdep update
 RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
 
-###Tensorflow Installation
+# Install Tensorflow 
 USER root
 RUN apt-get install -y python3-dev python3-pip  && \
     pip3 install --user --upgrade tensorflow
+
+# Install Moveit
+## Update ROS
+USER $USER
+RUN rosdep update
+##  back to root
+USER root
+RUN apt-get update && \
+    apt-get -y dist-upgrade && \
+    apt-get install -y ros-melodic-catkin python-wstool python-catkin-tools clang-format-3.9
+
+## Create Workspace
+RUN mkdir -p ~/ws_moveit && \
+    cd ~/ws_moveit && \
+    wstool init src && \
+    wstool merge -t src https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall && \
+    wstool update -t src && \
+    rosdep install -y --from-paths src --ignore-src --rosdistro melodic && \
+    catkin config --extend /opt/ros/melodic --cmake-args -DCMAKE_BUILD_TYPE=Release && \
+    catkin build
+
+### Source workspace
+#RUN source ~/ws_moveit/devel/setup.bash && \
+#    echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
+
+## Download Examples
+RUN cd ~/ws_moveit/src && \
+    rm -rf moveit_tutorials && \
+    rm -rf panda_moveit_config && \
+    git clone https://github.com/ros-planning/moveit_tutorials.git -b master && \
+    git clone https://github.com/ros-planning/panda_moveit_config.git -b melodic-devel
 
 # Expose Tensorboard
 EXPOSE 6006
