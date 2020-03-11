@@ -21,7 +21,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 * ROS MoveIt - Robot Motion Planning and Simulation
 * Tensorflow GPU
 
-## Usage
+## Startup & Install
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
       docker run -d -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgt
