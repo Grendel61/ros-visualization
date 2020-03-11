@@ -118,4 +118,4 @@ MoveIt is an easy-to-use robotics manipulation platform for developing applicati
 - Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
 ## Contributors
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
-* [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc)
+* [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc) - provided the very complex VNC integration to Ubuntu, and the basic approach for ROS
