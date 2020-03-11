@@ -33,6 +33,14 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 - If you want to connect to tensorboard, run command with mapping to local port `6006`:
       
       docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgt
+### MAINTAINERS FAVORITE
+Simply mount the Desktop `home/ros/Desktop/src` to an existing directory. This will put any new generated directories or files outside the container where they can be edited with an IDE:
+```
+      docker run -it --rm -p 5901:5901 -p 6901:6901 \
+      -e VNC_PW=vncpassword \
+      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
+      grendel61/ros-visualization:mdgt
+```
 
 ## Advanced Docker Run settings
 
@@ -67,9 +75,7 @@ the docker run command:
     docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mdgt
 ```
 ### Mount a local directory to the container
-You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. 
-
-### Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
+You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
 ```
       docker run -it -p 5901:5901 \
         --user $(id -u):$(id -g) \
@@ -77,15 +83,9 @@ You can settings to the run to connect a local directory which will receive new 
         --volume /etc/group:/etc/group \
         --volume /etc/shadow:/etc/shadow \
         --volume /home/ros/Desktop:/home/ros/Desktop:rw \
-        grendel61/ros-visualization:mdgt
+        grendel61/ros-visualization:mdgtm
 ```
-### FAVORITE - Simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
-```
-      docker run -it --rm -p 5901:5901 -p 6901:6901 \
-      -e VNC_PW=vncpassword \
-      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
-      grendel61/ros-visualization:mdgt
-```
+
 ### Connecting jupyter notebook within container
 - Run command with mapping to local port `8888` (jupyter protocol) and `8888` (host web access):
 ```
