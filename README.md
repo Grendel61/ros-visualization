@@ -5,7 +5,7 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
 https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 
 ## Build: 
-[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgtm .svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgtm m "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgtm.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgtm "Get your own version badge on microbadger.com")
 `Grendel61/ros-visualization:mdgtm `: 
 (mgdt: Melodic-Desktop Gazebo Tensorflow)
 * Ubuntu 18.04 with Desktop
