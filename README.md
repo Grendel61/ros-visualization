@@ -21,7 +21,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 * ROS MoveIt - Robot Motion Planning and Simulation
 * Tensorflow GPU
 
-## Startup & Install
+## Startup & Install ROS-Visualization
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
       docker run -d -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgt
@@ -34,16 +34,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
       
       docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgt
 
-## Connect & Control
-To connect the Ubuntu Desktop:
-
-* Connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
-* Connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
-* Connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
-* Connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
-* The default username and password in container is ros:ros
-
-## Detail Docker Run settings
+## Advanced Docker Run settings
 
 #### 1.1) Using root (user id `0`)
 Add the `--user` flag to your docker run command:
@@ -108,12 +99,20 @@ You can settings to the run to connect a local directory which will receive new 
 ```
       http://localhost:8888/
 ```
-### 5) Use Gazebo
+## Display Connect & Control
+You can connect to the Ubuntu desktop and run applications like RVIZ, Gazebo, etc. in multiple ways:
+* Connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
+* Connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
+* Connect via __noVNC HTML5 lite client__: [`http://localhost:6901/?password=vncpassword`](http://localhost:6901/?password=vncpassword) 
+* Connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
+* The default username and password in container is ros:ros
+
+## Use Gazebo
 - Start the ros-visualization container with a `docker run` (see above)
 - Start a terminal window from within the Container. 
 - Enter on the command line `gazebo`
 - Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
-### 5) Use MoveIt
+## Use MoveIt
 - Start the ros-visualization container with a `docker run` (see above)
 - Start a terminal window from within the Container. 
 - Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
