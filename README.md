@@ -111,7 +111,7 @@ Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently 
 - Enter on the command line `gazebo`
 - Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
 ## Using MoveIt
-Easy-to-use robotics manipulation platform for developing applications, evaluating designs, and building integrated products
+MoveIt is an easy-to-use robotics manipulation platform for developing applications, evaluating designs, and building integrated products
 - Start the ros-visualization container with a `docker run` (see above)
 - Start a terminal window from within the Container. 
 - Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
