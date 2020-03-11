@@ -33,7 +33,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 - If you want to connect to tensorboard, run command with mapping to local port `6006`:
       
       docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgt
-### MAINTAINERS FAVORITE
+### Favorite Startup
 Simply mount the Desktop `home/ros/Desktop/src` to an existing directory. This will put any new generated directories or files outside the container where they can be edited with an IDE:
 ```
       docker run -it --rm -p 5901:5901 -p 6901:6901 \
