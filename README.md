@@ -7,7 +7,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 ## Build: 
 [![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgtm.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgtm "Get your own version badge on microbadger.com")
 `Grendel61/ros-visualization:mdgtm `: 
-(mgdt: Melodic-Desktop Gazebo Tensorflow MoveIt)
+(mgdtm: Melodic-Desktop Gazebo Tensorflow MoveIt)
 * Ubuntu 18.04 with Desktop
 * VNC/No-VNC on Ports: 5901/6901
 * XFCE Window Manager
