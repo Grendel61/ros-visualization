@@ -15,7 +15,8 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
   * RVIZ
   * Robot Generic Libraries
   * 2D/3D simulaters and perception
-* ROS Gazebo 9
+* ROS Gazebo 9 - Robot Model Development and Simulation
+* ROS MoveIt - Robot Motion Planning and Simulation
 * Tensorflow GPU
 
 ## Usage
@@ -105,11 +106,16 @@ You can settings to the run to connect a local directory which will receive new 
 ```
       http://localhost:8888/
 ```
-### 5) Run Gazebo
-- From a terminal window, start the container with a `docker run ... `
-- From inside the container, enter in the command line `gazebo`
-
+### 5) Use Gazebo
+- Start the ros-visualization container with a `docker run` (see above)
+- Start a terminal window from within the Container. 
+- Enter on the command line `gazebo`
+- Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
+### 5) Use MoveIt
+- Start the ros-visualization container with a `docker run` (see above)
+- Start a terminal window from within the Container. 
+- Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
+- Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
 ## Contributors
-
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
 * [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc)
