@@ -5,8 +5,8 @@ This repository builds an Ubuntu environment for developing and visualizing Robo
 https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 
 ## Build: 
-[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgt.svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgt "Get your own version badge on microbadger.com")
-`Grendel61/ros-visualization:mdgt`: 
+[![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:mdgtm .svg)](https://microbadger.com/images/grendel61/ros-visualization:mdgtm m "Get your own version badge on microbadger.com")
+`Grendel61/ros-visualization:mdgtm `: 
 (mgdt: Melodic-Desktop Gazebo Tensorflow)
 * Ubuntu 18.04 with Desktop
 * VNC/No-VNC on Ports: 5901/6901
@@ -24,22 +24,22 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 ## Startup & Install ROS-Visualization
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
-      docker run -d -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgt
+      docker run -d -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgtm 
 
 - If you want to get into the container use interactive mode `-it` and `bash`
       
-      docker run -it -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgt bash
+      docker run -it -p 5901:5901 -p 6901:6901 grendel61/ros-visualization:mdgtm bash
 
 - If you want to connect to tensorboard, run command with mapping to local port `6006`:
       
-      docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgt
+      docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:mdgtm 
 ### Favorite Startup
 Simply mount the Desktop `home/ros/Desktop/src` to an existing directory. This will put any new generated directories or files outside the container where they can be edited with an IDE:
 ```
       docker run -it --rm -p 5901:5901 -p 6901:6901 \
       -e VNC_PW=vncpassword \
       -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
-      grendel61/ros-visualization:mdgt
+      grendel61/ros-visualization:mdgtm 
 ```
 
 ## Advanced Docker Run settings
@@ -47,12 +47,12 @@ Simply mount the Desktop `home/ros/Desktop/src` to an existing directory. This w
 ### Using root (user id `0`)
 Add the `--user` flag to your docker run command:
 ```
-    docker run -it --user root -p 5901:5901 grendel61/ros-visualization:mdgt
+    docker run -it --user root -p 5901:5901 grendel61/ros-visualization:mdgtm 
 ```
 ### Using user and group id of host system
 Add the `--user` flag to your docker run command (Note: uid and gui of host system may not able to map with container, which is 1000:1000. If that is the case, check with 3):
 ```
-    docker run -it -p 5901:5901 --user $(id -u):$(id -g) grendel61/ros-visualization:mdgt
+    docker run -it -p 5901:5901 --user $(id -u):$(id -g) grendel61/ros-visualization:mdgtm 
 ```
 ### Override VNC and Container environment variables
 The following VNC environment variables can be overwritten at the `docker run` phase to customize your desktop environment inside the container:
@@ -66,13 +66,13 @@ The following VNC environment variables can be overwritten at the `docker run` p
 Simply overwrite the value of the environment variable `VNC_PW`. For example in
 the docker run command:
 ```
-    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_PW=vncpassword grendel61/ros-visualization:mdgt
+    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_PW=vncpassword grendel61/ros-visualization:mdgtm 
 ```
 ### Override the VNC resolution
 Simply overwrite the value of the environment variable `VNC_RESOLUTION`. For example in
 the docker run command:
 ```
-    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mdgt
+    docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mdgtm 
 ```
 ### Mount a local directory to the container
 You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
@@ -89,7 +89,7 @@ You can settings to the run to connect a local directory which will receive new 
 ### Connecting jupyter notebook within container
 - Run command with mapping to local port `8888` (jupyter protocol) and `8888` (host web access):
 ```
-      docker run -d -p 8888:8888 grendel61/ros-visualization:mdgt
+      docker run -d -p 8888:8888 grendel61/ros-visualization:mdgtm 
 ```
 - Check your local IP within container using `` $ifconfig``, then you can start up jupyter notebook in container with following command: 
 ```
