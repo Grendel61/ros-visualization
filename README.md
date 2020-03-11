@@ -6,7 +6,8 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 
 ## Build: 
 [![](https://images.microbadger.com/badges/version/grendel61/ros-visualization:latest.svg)](https://microbadger.com/images/grendel61/ros-visualization:latest "Get your own version badge on microbadger.com")
-`Grendel61/ros-visualization:latest `: 
+
+###`Grendel61/ros-visualization:latest`
 * Ubuntu 18.04 with Desktop
 * VNC/No-VNC on Ports: 5901/6901
 * XFCE Window Manager
