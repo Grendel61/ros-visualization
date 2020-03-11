@@ -36,17 +36,17 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 
 ## Advanced Docker Run settings
 
-#### 1.1) Using root (user id `0`)
+### Using root (user id `0`)
 Add the `--user` flag to your docker run command:
 ```
     docker run -it --user root -p 5901:5901 grendel61/ros-visualization:mdgt
 ```
-#### 1.2) Using user and group id of host system
+### Using user and group id of host system
 Add the `--user` flag to your docker run command (Note: uid and gui of host system may not able to map with container, which is 1000:1000. If that is the case, check with 3):
 ```
     docker run -it -p 5901:5901 --user $(id -u):$(id -g) grendel61/ros-visualization:mdgt
 ```
-### 2) Override VNC and Container environment variables
+### Override VNC and Container environment variables
 The following VNC environment variables can be overwritten at the `docker run` phase to customize your desktop environment inside the container:
 * `VNC_COL_DEPTH`, default: `24`
 * `VNC_RESOLUTION`, default: `1920x1080`
@@ -54,22 +54,22 @@ The following VNC environment variables can be overwritten at the `docker run` p
 * `USER`, default: `ros`
 * `PASSWD`, default: `ros`
 
-#### 2.1) Example: Override the VNC password
+### Override the VNC password
 Simply overwrite the value of the environment variable `VNC_PW`. For example in
 the docker run command:
 ```
     docker run -it -p 5901:5901 -p 6901:6901 -e VNC_PW=vncpassword grendel61/ros-visualization:mdgt
 ```
-#### 2.2) Example: Override the VNC resolution
+### Override the VNC resolution
 Simply overwrite the value of the environment variable `VNC_RESOLUTION`. For example in
 the docker run command:
 ```
     docker run -it -p 5901:5901 -p 6901:6901 -e VNC_RESOLUTION=800x600 grendel61/ros-visualization:mdgt
 ```
-### 3) Mount a local directory to the container
+### Mount a local directory to the container
 You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. 
 
-#### 3.1) Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
+### Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
 ```
       docker run -it -p 5901:5901 \
         --user $(id -u):$(id -g) \
@@ -79,14 +79,14 @@ You can settings to the run to connect a local directory which will receive new 
         --volume /home/ros/Desktop:/home/ros/Desktop:rw \
         grendel61/ros-visualization:mdgt
 ```
-#### 3.2) You can simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
+### FAVORITE - Simply mount the Desktop `home/ros/Desktop/src` to an existing. This will put any new generated directories or files outside the container where they can be edited with an IDE:
 ```
       docker run -it --rm -p 5901:5901 -p 6901:6901 \
       -e VNC_PW=vncpassword \
       -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
       grendel61/ros-visualization:mdgt
 ```
-### 4) Connecting jupyter notebook within container
+### Connecting jupyter notebook within container
 - Run command with mapping to local port `8888` (jupyter protocol) and `8888` (host web access):
 ```
       docker run -d -p 8888:8888 grendel61/ros-visualization:mdgt
@@ -99,7 +99,7 @@ You can settings to the run to connect a local directory which will receive new 
 ```
       http://localhost:8888/
 ```
-## Display Connect & Control
+## Display Connections & Controls
 You can connect to the Ubuntu desktop and run applications like RVIZ, Gazebo, etc. in multiple ways:
 * Connect via __VNC viewer `localhost:5901`__, default password: `vncpassword`
 * Connect via __noVNC HTML5 full client__: [`http://localhost:6901/vnc.html`](http://localhost:6901/vnc.html), default password: `vncpassword` 
@@ -107,12 +107,12 @@ You can connect to the Ubuntu desktop and run applications like RVIZ, Gazebo, et
 * Connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
 * The default username and password in container is ros:ros
 
-## Use Gazebo
+## Using Gazebo
 - Start the ros-visualization container with a `docker run` (see above)
 - Start a terminal window from within the Container. 
 - Enter on the command line `gazebo`
 - Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
-## Use MoveIt
+## Using MoveIt
 - Start the ros-visualization container with a `docker run` (see above)
 - Start a terminal window from within the Container. 
 - Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
