@@ -31,7 +31,7 @@ RUN groupadd $USER && \
 
 
 ### VNC Installation
-LABEL io.k8s.description="Ubuntu VNC with Xfce running ROS Melodic Desktop, Gazebo, and Tensorflow" \
+LABEL io.k8s.description="Ubuntu VNC with Xfce running ROS Melodic Desktop, Gazebo, MoveIt, and Tensorflow" \
       io.k8s.display-name="ROS Visualization and Development Environment" \
       io.openshift.expose-services="6901:http,5901:xvnc,6006:tnesorboard" \
       io.openshift.tags="vnc, xfce, ubuntu, ros, ros desktop, gazebo, tensorflow" \
@@ -149,8 +149,8 @@ RUN mkdir -p ~/ws_moveit && \
     catkin build
 
 ### Source workspace
-#RUN source ~/ws_moveit/devel/setup.bash && \
-#    echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
+RUN echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
+RUN /bin/bash -c "source ~/.bashrc"
 
 ## Download Examples
 RUN cd ~/ws_moveit/src && \
