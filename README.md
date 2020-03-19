@@ -116,6 +116,24 @@ MoveIt is an easy-to-use robotics manipulation platform for developing applicati
 - Start a terminal window from within the Container. 
 - Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
 - Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
+## Developing with Ros-Visualization
+Ros-Visualization was designed to provide a method for avoiding the install process for Gazebo and MoveIt, and allow you to run these applications directly from the container. The ability to attach a local volume (see above) also makes this solution viable for a development platform. 
+
+Example:
+1) Create a GitHub repository on your GitHub account. 
+2) Clone to your local machine. 
+3) In a terminal window (e.g. see example below on VSCode) run Ros-Visualization with a detached volume (e.g. -v) 
+
+```
+      docker run -it --rm -p 5901:5901 -p 6901:6901 \
+      -e VNC_PW=vncpassword \
+      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
+      grendel61/ros-visualization:latest 
+```
+The end of the run should look like this:
+
+4) Simply attach a shell to the running container, In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
+
 ## Contributors
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
 * [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc) - provided the very complex VNC integration to Ubuntu, and the basic approach for ROS
