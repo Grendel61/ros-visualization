@@ -27,12 +27,12 @@ Ros-Visualization was designed to provide a method for avoiding the install proc
 1) Create a GitHub repository on your GitHub account to hold your source code, lets call this `Ros-source`.  
 2) Clone to your local machine. 
 3) In a terminal window (e.g. see example below on VSCode)run Ros-Visualization with a detached volume (e.g. -v). Replace `[Path to Ros-source directory]` with the actual local path to your Ros-source repository. 
-```
-      docker run -it --rm -p 5901:5901 -p 6901:6901 \
-      -e VNC_PW=vncpassword \
-      -v /[Ros-Source directory]:/home/ros/Desktop/src \
-      grendel61/ros-visualization:latest 
-```
+  ```
+  docker run -it --rm -p 5901:5901 -p 6901:6901 \
+  -e VNC_PW=vncpassword \
+  -v /[Ros-Source directory]:/home/ros/Desktop/src \
+  grendel61/ros-visualization:latest 
+  ```
  The end of the run should look like this:
  
   ![](/pics/ros-visualization-run.jpg)
@@ -134,13 +134,13 @@ the docker run command:
 ### Mount a local directory to the container
 You can settings to the run to connect a local directory which will receive new files created with the container. This will let you edit generated files with your IDE. Map your group/user to the container retrieve R/W permission to the mounted directory of mounting directory in container (Note: after running this command, the user account in container will be same as host account):
 ```
-      docker run -it -p 5901:5901 \
-        --user $(id -u):$(id -g) \
-        --volume /etc/passwd:/etc/passwd \
-        --volume /etc/group:/etc/group \
-        --volume /etc/shadow:/etc/shadow \
-        --volume /home/ros/Desktop:/home/ros/Desktop:rw \
-        grendel61/ros-visualization:latest
+ docker run -it -p 5901:5901 \
+   --user $(id -u):$(id -g) \
+   --volume /etc/passwd:/etc/passwd \
+   --volume /etc/group:/etc/group \
+   --volume /etc/shadow:/etc/shadow \
+   --volume /home/ros/Desktop:/home/ros/Desktop:rw \
+   grendel61/ros-visualization:latest
 ```
 
 ### Connecting jupyter notebook within container
