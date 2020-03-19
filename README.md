@@ -18,6 +18,65 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 * ROS MoveIt - Robot Motion Planning and Simulation
 * Tensorflow GPU
 
+# Using Ros-Visualization
+Ros-Visualization was designed to provide a method for avoiding the install process for Gazebo and MoveIt, and allow you to run these applications directly from the container. There is no need to separately install Ros-Visualization just run it from the command line. You will have two categories of options to decide how you want to run the container:
+* How you want to view the results of the Ros-Visualization container - For visualization and viewing of the desktop you can chose to use a VNC client or a browser client. This comes down to setting a port number. You can also set resolution and other information. 
+* Where you want to keep ROS source code and configurations specific to your run. For source code you can setup a detached volume. This enables you to put your simulation code into a Git directory that you can edit in your favorite IDE. The ability to attach a local volume (see above) also makes this solution viable for a development platform. 
+
+## Running Ros-Visualization
+1) Create a GitHub repository on your GitHub account to hold your source code, lets call this `Ros-source`.  
+2) Clone to your local machine. 
+3) In a terminal window (e.g. see example below on VSCode)run Ros-Visualization with a detached volume (e.g. -v). Replace `[Path to Ros-source directory]` with the actual local path to your Ros-source repository. 
+```
+      docker run -it --rm -p 5901:5901 -p 6901:6901 \
+      -e VNC_PW=vncpassword \
+      -v /[Ros-Source directory]:/home/ros/Desktop/src \
+      grendel61/ros-visualization:latest 
+```
+ The end of the run should look like this:
+  ![](/pics/ros-visualization-run.jpg)
+ The container will remain running, so you'll need to attach a new shell to the container to continue the startup process. 
+4) Open up the desktop viewer in your browser. Open a browser window. 
+In the URL field enter: 
+```
+http://localhost:6901/`
+```
+In the password field in the center top of the screen, enter: 
+```
+vncpassword
+```
+  ![](/pics/vncpassword.png)
+5) Use the desktop. Entering the correct password will bring up the Ubuntu Desktop. Explore it. 
+  ![](/pics/ubuntu-desktop.png)
+6) Ros-source directory (e.g. `src`). The source directory folder on the bottom left of the screen is where your configuration data and code will be stored. At startup unless you've used your Ros-source directory before it will be empty. Here is a Ros-source directory after using Moveit. In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
+  ![](/pics/src-directory.png)
+4) Now attach a shell to the running container. Attaching a shell is how you will launch Ros nodes you have already built, or use simulation libraries like Gazebo and MoveIt. 
+  ![](/pics/attach-shell.png)
+### Using an existing ROS Node
+Now that you have completed the steps above, you can launch an existing Ros Node, visualization application, or start a tutorial. To run a ROS node use roslaunch as below replacing `package_name file.launch` with an actual Ros Node in your source diretory. 
+```
+roslaunch package_name file.launch
+```
+### Using Gazebo
+Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
+- Start the ros-visualization container with a `docker run` (see above)
+- Attach a shell to the container to open a terminal window to run Gazebo 
+- Enter on the command line:
+```
+gazebo
+```
+- Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
+### Using MoveIt
+MoveIt is an easy-to-use robotics manipulation platform for developing applications, evaluating designs, and building integrated products
+- Start the ros-visualization container with a `docker run` (see above)
+- Attach a shell to the container to open a terminal window to run Gazebo
+- Enter on the command line
+```
+roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+```
+- Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
+
+# Detailed Instructions
 ## Startup & Install ROS-Visualization
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
@@ -30,14 +89,6 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 - If you want to connect to tensorboard, run command with mapping to local port `6006`:
       
       docker run -it -p 5901:5901 -p 6901:6901 -p 6006:6006 grendel61/ros-visualization:latest 
-### Favorite Startup
-Simply mount the Desktop `home/ros/Desktop/src` to an existing directory. This will put any new generated directories or files outside the container where they can be edited with an IDE:
-```
-      docker run -it --rm -p 5901:5901 -p 6901:6901 \
-      -e VNC_PW=vncpassword \
-      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
-      grendel61/ros-visualization:latest 
-```
 
 ## Advanced Docker Run settings
 
@@ -104,42 +155,6 @@ You can connect to the Ubuntu desktop and run applications like RVIZ, Gazebo, et
 * Connect to __Tensorboard__ if you do the tensorboard mapping above: [`http://localhost:6006`](http://localhost:6006)
 * The default username and password in container is ros:ros
 
-## Using Gazebo
-Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
-- Start the ros-visualization container with a `docker run` (see above)
-- Attach a shell to the container to open a terminal window to run Gazebo 
-  ![](/pics/attach-shell.png)
-- Enter on the command line `gazebo`
-- Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
-## Using MoveIt
-MoveIt is an easy-to-use robotics manipulation platform for developing applications, evaluating designs, and building integrated products
-- Start the ros-visualization container with a `docker run` (see above)
-- Attach a shell to the container to open a terminal window to run Gazebo
-  ![](/pics/attach-shell.png)
-- Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
-- Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
-## Developing with Ros-Visualization
-Ros-Visualization was designed to provide a method for avoiding the install process for Gazebo and MoveIt, and allow you to run these applications directly from the container. The ability to attach a local volume (see above) also makes this solution viable for a development platform. 
-
-Example:
-1) Create a GitHub repository on your GitHub account. 
-2) Clone to your local machine. 
-3) In a terminal window (e.g. see example below on VSCode) run Ros-Visualization with a detached volume (e.g. -v) 
-
-```
-      docker run -it --rm -p 5901:5901 -p 6901:6901 \
-      -e VNC_PW=vncpassword \
-      -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
-      grendel61/ros-visualization:latest 
-```
- The end of the run should look like this:
-  ![](/pics/ros-visualization-run.jpg)
-4) Attach a shell to the running container, In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
-  ![](/pics/attach-shell.png)
-5) This will open a terminal window running the container. Now run roslaunch as you would normally do from the command line: 
-```
-roslaunch package_name file.launch
-```
 ## Contributors
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
 * [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc) - provided the very complex VNC integration to Ubuntu, and the basic approach for ROS
