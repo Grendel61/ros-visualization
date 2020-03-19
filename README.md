@@ -130,10 +130,14 @@ Example:
       -v /Users/edfullman/Github/citadel-elrond/src:/home/ros/Desktop/src \
       grendel61/ros-visualization:latest 
 ```
-The end of the run should look like this:
-
-4) Simply attach a shell to the running container, In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
-
+ The end of the run should look like this:
+  ![](/pics/ros-visualization-run.jpg)
+4) Attach a shell to the running container, In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
+  ![](/pics/attach-shell.png)
+5) This will open a terminal window running the container. Now run roslaunch as you would normally do from the command line: 
+```
+roslaunch package_name file.launch
+```
 ## Contributors
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
 * [Docker-Ros-VNC](https://github.com/henry2423/docker-ros-vnc) - provided the very complex VNC integration to Ubuntu, and the basic approach for ROS
