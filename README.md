@@ -107,13 +107,15 @@ You can connect to the Ubuntu desktop and run applications like RVIZ, Gazebo, et
 ## Using Gazebo
 Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
 - Start the ros-visualization container with a `docker run` (see above)
-- Start a terminal window from within the Container. 
+- Attach a shell to the container to open a terminal window to run Gazebo 
+  ![](/pics/attach-shell.png)
 - Enter on the command line `gazebo`
 - Follow the [Gazebo tutorials](http://gazebosim.org/tutorials?cat=get_started) 
 ## Using MoveIt
 MoveIt is an easy-to-use robotics manipulation platform for developing applications, evaluating designs, and building integrated products
 - Start the ros-visualization container with a `docker run` (see above)
-- Start a terminal window from within the Container. 
+- Attach a shell to the container to open a terminal window to run Gazebo
+  ![](/pics/attach-shell.png)
 - Enter on the command line `roslaunch panda_moveit_config demo.launch rviz_tutorial:=true`
 - Follow the [MoveIt tutorials](https://ros-planning.github.io/moveit_tutorials/)
 ## Developing with Ros-Visualization
