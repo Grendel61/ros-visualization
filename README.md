@@ -41,7 +41,7 @@ Ros-Visualization was designed to provide a method for avoiding the install proc
 4) Open up the desktop viewer in your browser. Open a browser window. 
 In the URL field enter: 
 ```
-http://localhost:6901/`
+http://localhost:6901/
 ```
 In the password field in the center top of the screen, enter: 
 ```
