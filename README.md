@@ -26,7 +26,7 @@ Ros-Visualization was designed to provide a method for avoiding the install proc
 ## Running Ros-Visualization
 1) Create a GitHub repository on your GitHub account to hold your source code, lets call this `Ros-source`.  
 2) Clone to your local machine. 
-3) In a terminal window (e.g. see example below on VSCode)run Ros-Visualization with a detached volume (e.g. -v). Replace `[Path to Ros-source directory]` with the actual local path to your Ros-source repository. 
+3) In a terminal window (e.g. see example below on VSCode) run Ros-Visualization with a detached volume (e.g. -v). Replace `[Path to Ros-source directory]` with the actual local path to your Ros-source repository. 
   ```
   docker run -it --rm -p 5901:5901 -p 6901:6901 \
   -e VNC_PW=vncpassword \
@@ -58,6 +58,8 @@ vncpassword
   ![](/pics/src-directory.png)
   
 4) Now attach a shell to the running container. Attaching a shell is how you will launch Ros nodes you have already built, or use simulation libraries like Gazebo and MoveIt. 
+
+Start VSCode, if you don't have the VSCode Docker extension, add it. Now in the Containers section (top left), `right click` on the Ros-visualization container you started in the previous steps, and now select Attach Shell. This will place you into a shell inside the container, and from here you can enter ROS oriented commands.
 
   ![](/pics/attach-shell.png)
   
