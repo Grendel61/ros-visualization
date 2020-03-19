@@ -14,6 +14,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
   * RVIZ
   * Robot Generic Libraries
   * 2D/3D simulaters and perception
+  * Python 3 64-bit
 * ROS Gazebo 9 - Robot Model Development and Simulation
 * ROS MoveIt - Robot Motion Planning and Simulation
 * Tensorflow GPU
