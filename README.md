@@ -34,7 +34,9 @@ Ros-Visualization was designed to provide a method for avoiding the install proc
       grendel61/ros-visualization:latest 
 ```
  The end of the run should look like this:
+ 
   ![](/pics/ros-visualization-run.jpg)
+  
  The container will remain running, so you'll need to attach a new shell to the container to continue the startup process. 
 4) Open up the desktop viewer in your browser. Open a browser window. 
 In the URL field enter: 
@@ -46,12 +48,19 @@ In the password field in the center top of the screen, enter:
 vncpassword
 ```
   ![](/pics/vncpassword.png)
+  
 5) Use the desktop. Entering the correct password will bring up the Ubuntu Desktop. Explore it. 
+
   ![](/pics/ubuntu-desktop.png)
+  
 6) Ros-source directory (e.g. `src`). The source directory folder on the bottom left of the screen is where your configuration data and code will be stored. At startup unless you've used your Ros-source directory before it will be empty. Here is a Ros-source directory after using Moveit. In this way you can build your Catkin directories for ROS as above so that they will survive exiting the container, and can be under source control. 
+
   ![](/pics/src-directory.png)
+  
 4) Now attach a shell to the running container. Attaching a shell is how you will launch Ros nodes you have already built, or use simulation libraries like Gazebo and MoveIt. 
+
   ![](/pics/attach-shell.png)
+  
 ### Using an existing ROS Node
 Now that you have completed the steps above, you can launch an existing Ros Node, visualization application, or start a tutorial. To run a ROS node use roslaunch as below replacing `package_name file.launch` with an actual Ros Node in your source diretory. 
 ```
