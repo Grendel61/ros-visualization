@@ -88,7 +88,7 @@ ADD ./src/common/scripts $STARTUPDIR
 RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
 
 
-### ROS and Gazebo Installation
+### ROS and Package Installation
 # Install other utilities
 RUN apt-get update && \
     apt-get install -y vim apt-utils \
@@ -99,12 +99,13 @@ RUN apt-get update && \
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     apt-get update && \
-    apt-get install -y ros-melodic-desktop-full
-
-RUN rosdep init
+    apt-get install -y ros-melodic-desktop-full && \
+    apt-get install -y python-rosdep
+ RUN /bin/bash -c "source /opt/ros/melodic/setup.bash"
+ RUN rosdep init -y
 
 USER $USER
-RUN rosdep update
+RUN rosdep update -y
 
 USER root
 ## Install Dependencies
