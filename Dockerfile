@@ -31,11 +31,21 @@ RUN groupadd $USER && \
 
 
 ### VNC Installation
-LABEL io.k8s.description="Ubuntu VNC with Xfce running ROS Melodic Desktop, Gazebo, MoveIt, and Tensorflow" \
-      io.k8s.display-name="ROS Visualization and Development Environment" \
-      io.openshift.expose-services="6901:http,5901:xvnc,6006:tnesorboard" \
-      io.openshift.tags="vnc, xfce, ubuntu, ros, ros desktop, gazebo, tensorflow" \
-      io.openshift.non-scalable=true
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL org.label-schema.build-date=$BUILD_DATE \
+    org.label-schema.name="Ros Visualization" \
+    org.label-schema.description="Ros/Ubuntu container with built in Visualization tools for development" \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.vcs-url="https://github.com/Grendel61/ros-visualization" \
+    org.label-schema.version=$VERSION \
+    org.label-schema.schema-version="1.0" \
+    io.k8s.description="Ubuntu VNC with Xfce running ROS Melodic Desktop, Gazebo, MoveIt, and Tensorflow" \
+    io.k8s.display-name="ROS Visualization and Development Environment" \
+    io.openshift.expose-services="6901:http,5901:xvnc,6006:tnesorboard" \
+    io.openshift.tags="vnc, xfce, ubuntu, ros, ros desktop, gazebo, tensorflow" \
+    io.openshift.non-scalable=true
 
 ## Connection ports for controlling the UI:
 # VNC port:5901
