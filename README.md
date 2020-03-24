@@ -6,7 +6,6 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 
 ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/grendel61/ros-visualization/latest) 
 ![MicroBadger Layers](https://img.shields.io/microbadger/layers/grendel61/ros-visualization)
-![Docker Image Size (tag)](https://img.shields.io/docker/image-size/grendel61/ros-visualization/latest)
 
 ## Grendel61/ros-visualization:latest
 * Ubuntu 18.04 with Desktop
