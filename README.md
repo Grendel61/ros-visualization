@@ -67,11 +67,58 @@ Start VSCode, if you don't have the VSCode Docker extension, add it. Now in the 
 
   ![](/pics/attach-shell.png)
   
-### Using an existing ROS Node
-Now that you have completed the steps above, you can launch an existing Ros Node, visualization application, or start a tutorial. To run a ROS node use roslaunch as below replacing `package_name file.launch` with an actual Ros Node in your source diretory. 
+### Using an existing ROS Service
+Now that you have completed the steps above, you can launch an existing Ros service or topic. A good example is the [Turtlebot simulation](http://wiki.ros.org/turtlesim). This will require you to open multiple terminal windows. But you will be learning how ROS works. 
+
+The Turtlebot Simulator is already installed, so you can jump in quickly by running it. 
+1. Start the ros-visualization container with a `docker run` (see above)
+2. This will give you a cursor so attach a shell to the container to open a terminal window to run Turtlebot (see above)
+3. Now start `roscore`, on the command line of the new shell type:
+``` 
+roscore
 ```
-roslaunch package_name file.launch
+This will start the Roscore server, and you'll be ready to run a ROS Service. You should see something like this:
 ```
+ros@e52e7c314fb4:~$ roscore
+... logging to /home/ros/.ros/log/f72a3a66-6ece-11ea-bea0-0242ac110002/roslaunch-e52e7c314fb4-292.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://e52e7c314fb4:35167/
+ros_comm version 1.14.4
+
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: melodic
+ * /rosversion: 1.14.4
+
+NODES
+
+auto-starting new master
+process[master]: started with pid [302]
+ROS_MASTER_URI=http://e52e7c314fb4:11311/
+
+setting /run_id to f72a3a66-6ece-11ea-bea0-0242ac110002
+process[rosout-1]: started with pid [313]
+started core service [/rosout]
+```
+4. Attach a new shell to the container to open a terminal window to run Turtlebot (see above)
+5. In the new terminal window enter:
+```
+rosrun turtlesim turtlesim_node
+```
+You should see:
+```
+ros@e52e7c314fb4:~$ rosrun turtlesim turtlesim_node
+QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ros'
+[ INFO] [1585164731.259722600]: Starting turtlesim with node name /turtlesim
+```
+6. At this point, if you opened a browser window to your container at http://localhost:6901/ you should see a turtlebot like this:
+
 ### Using Gazebo
 Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
 - Start the ros-visualization container with a `docker run` (see above)
