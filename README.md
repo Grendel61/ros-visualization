@@ -75,48 +75,50 @@ The Turtlebot Simulator is already installed, so you can jump in quickly by runn
 2. This will give you a cursor so attach a shell to the container to open a terminal window to run Turtlebot (see above)
 3. Now start `roscore`, on the command line of the new shell type:
 ``` 
-roscore
+  roscore
 ```
 This will start the Roscore server, and you'll be ready to run a ROS Service. You should see something like this:
 ```
-ros@e52e7c314fb4:~$ roscore
-... logging to /home/ros/.ros/log/f72a3a66-6ece-11ea-bea0-0242ac110002/roslaunch-e52e7c314fb4-292.log
-Checking log directory for disk usage. This may take a while.
-Press Ctrl-C to interrupt
-Done checking log file disk usage. Usage is <1GB.
+  ros@e52e7c314fb4:~$ roscore
+  ... logging to /home/ros/.ros/log/f72a3a66-6ece-11ea-bea0-0242ac110002/roslaunch-e52e7c314fb4-292.log
+  Checking log directory for disk usage. This may take a while.
+  Press Ctrl-C to interrupt
+  Done checking log file disk usage. Usage is <1GB.
 
-started roslaunch server http://e52e7c314fb4:35167/
-ros_comm version 1.14.4
+  started roslaunch server http://e52e7c314fb4:35167/
+  ros_comm version 1.14.4
 
 
-SUMMARY
-========
+  SUMMARY
+  ========
 
-PARAMETERS
- * /rosdistro: melodic
- * /rosversion: 1.14.4
+  PARAMETERS
+  * /rosdistro: melodic
+  * /rosversion: 1.14.4
 
-NODES
+  NODES
 
-auto-starting new master
-process[master]: started with pid [302]
-ROS_MASTER_URI=http://e52e7c314fb4:11311/
+  auto-starting new master
+  process[master]: started with pid [302]
+  ROS_MASTER_URI=http://e52e7c314fb4:11311/
 
-setting /run_id to f72a3a66-6ece-11ea-bea0-0242ac110002
-process[rosout-1]: started with pid [313]
-started core service [/rosout]
+  setting /run_id to f72a3a66-6ece-11ea-bea0-0242ac110002
+  process[rosout-1]: started with pid [313]
+  started core service [/rosout]
 ```
 4. Attach a new shell to the container to open a terminal window to run Turtlebot (see above)
 5. In the new terminal window enter:
 ```
-rosrun turtlesim turtlesim_node
+  rosrun turtlesim turtlesim_node
 ```
 You should see:
 ```
-ros@e52e7c314fb4:~$ rosrun turtlesim turtlesim_node
-QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ros'
-[ INFO] [1585164731.259722600]: Starting turtlesim with node name /turtlesim
+  ros@e52e7c314fb4:~$ rosrun turtlesim turtlesim_node
+  QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ros'
+  [ INFO] [1585164731.259722600]: Starting turtlesim with node name /turtlesim
+  [ INFO] [1585164731.268737700]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
 ```
+This is shows the name of your turtle "turtle1", and its position and orientation. 
 6. At this point, if you opened a browser window to your container at http://localhost:6901/ you should see a turtlebot like this:
 
   ![](/pics/turtlebot.png)
@@ -124,13 +126,13 @@ QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ros'
 7. Now let's learn about the services that are running - attach a new shell to the container to open a terminal window to interact with ROS services (see above)
 8. In the new window let's look into the running TurtleSim ROS services. Let's start with what nodes are running, enter on the command line:
 ``` 
-rosnode list
+  rosnode list
 ```
 This should show: 
 ```
-ros@e52e7c314fb4:~$ rosnode list
-/rosout
-/turtlesim
+  ros@e52e7c314fb4:~$ rosnode list
+  /rosout
+  /turtlesim
 ```
 Now let's specifically look at ROS Services running, enter on the command line:
 ```
@@ -198,8 +200,7 @@ This is a terminal at location `7 7` with an orientation of `0` degrees from the
 ```
 In your window running the simulation (e.g. the 2nd window) you should see an INFO message:
 ```
-[ INFO] [1585164731.268737700]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
-[ INFO] [1585165017.538127200]: Spawning turtle [eddie] at x=[7.000000], y=[7.000000], theta=[0.000000]
+  [ INFO] [1585165017.538127200]: Spawning turtle [eddie] at x=[7.000000], y=[7.000000], theta=[0.000000]
 ```
 The top message was from when you started TurtleSim, the second message is for our "eddie" turtle created above. In your browser window for the desktop you should see a new turtle added to the screen. 
 
@@ -207,14 +208,13 @@ The top message was from when you started TurtleSim, the second message is for o
 
 Now let's remove that turtle, on the command line in your rosservice window enter:
 ```
-rosservice call /kill eddie
+  rosservice call /kill eddie
 ```
 The `/kill` command is listed in your command list on the TurtleSim. If you look at your browser window with the turtles, the "eddie" turtle should be gone. 
 
-Chack out these tutorials to learn more about ROS Services:
+Check out these tutorials to learn more about ROS Services:
 [Intro Video](https://www.youtube.com/watch?time_continue=480&v=qhnlmrGQVvM&feature=emb_logo)
 [TurtleSim Pages (see bottom)](http://wiki.ros.org/turtlesim)
-
 
 ### Using Gazebo
 Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
