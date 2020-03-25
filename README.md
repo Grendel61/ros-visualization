@@ -213,7 +213,9 @@ Now let's remove that turtle, on the command line in your rosservice window ente
 The `/kill` command is listed in your command list on the TurtleSim. If you look at your browser window with the turtles, the "eddie" turtle should be gone. 
 
 Check out these tutorials to learn more about ROS Services:
+
 [Intro Video](https://www.youtube.com/watch?time_continue=480&v=qhnlmrGQVvM&feature=emb_logo)
+
 [TurtleSim Pages (see bottom)](http://wiki.ros.org/turtlesim)
 
 ### Using Gazebo
