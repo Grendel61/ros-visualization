@@ -119,6 +119,103 @@ QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ros'
 ```
 6. At this point, if you opened a browser window to your container at http://localhost:6901/ you should see a turtlebot like this:
 
+  ![](/pics/turtlebot.png)
+
+7. Now let's learn about the services that are running - attach a new shell to the container to open a terminal window to interact with ROS services (see above)
+8. In the new window let's look into the running TurtleSim ROS services. Let's start with what nodes are running, enter on the command line:
+``` 
+rosnode list
+```
+This should show: 
+```
+ros@e52e7c314fb4:~$ rosnode list
+/rosout
+/turtlesim
+```
+Now let's specifically look at ROS Services running, enter on the command line:
+```
+  rosservice list
+```
+You should see something like this.
+```
+  ros@e52e7c314fb4:~$ rosservice list
+  /clear
+  /kill
+  /reset
+  /rosout/get_loggers
+  /rosout/set_logger_level
+  /spawn
+  /turtle1/set_pen
+  /turtle1/teleport_absolute
+  /turtle1/teleport_relative
+  /turtlesim/get_loggers
+  /turtlesim/set_logger_level
+```
+Now let's look into the `/spawn` service from that list. Spawn creates a new TurtleSim node, on the command line add:
+```
+  rosservice info /spawn
+```
+This should return information about the `/spawn` service. Think of it as a route. 
+```
+  ros@e52e7c314fb4:~$ rosservice info /spawn
+  Node: /turtlesim
+  URI: rosrpc://e52e7c314fb4:50939
+  Type: turtlesim/Spawn
+  Args: x y theta name
+```
+The `rosservice` has the following commands:
+```
+  Commands:
+          rosservice args print service arguments
+          rosservice call call the service with the provided args
+          rosservice find find services by service type
+          rosservice info print information about service
+          rosservice list list active services
+          rosservice type print service type
+          rosservice uri  print service ROSRPC uri
+```
+Now lets expose information about the API, enter on the command line:
+```
+  rossrv info turtlesim/Spawn
+```
+This exposes the types:
+```
+  ros@e52e7c314fb4:~$ rossrv info turtlesim/Spawn
+  float32 x
+  float32 y
+  float32 theta
+  string name
+  ---
+  string name
+```
+So let's create a new Turtle a little above and to the right of our current turtle which is at 0 0 0. On the command line enter:
+```
+  rosservice call /spawn 7 7 0 eddie
+```
+This is a terminal at location `7 7` with an orientation of `0` degrees from the base. In the terminal you should see:
+```
+  name: "eddie"
+```
+In your window running the simulation (e.g. the 2nd window) you should see an INFO message:
+```
+[ INFO] [1585164731.268737700]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
+[ INFO] [1585165017.538127200]: Spawning turtle [eddie] at x=[7.000000], y=[7.000000], theta=[0.000000]
+```
+The top message was from when you started TurtleSim, the second message is for our "eddie" turtle created above. In your browser window for the desktop you should see a new turtle added to the screen. 
+
+  ![](/pics/2turtles.png)
+
+Now let's remove that turtle, on the command line in your rosservice window enter:
+```
+rosservice call /kill eddie
+```
+The `/kill` command is listed in your command list on the TurtleSim. If you look at your browser window with the turtles, the "eddie" turtle should be gone. 
+
+Chack out these tutorials to learn more about ROS Services:
+[Intro Video](https://www.youtube.com/watch?time_continue=480&v=qhnlmrGQVvM&feature=emb_logo)
+[TurtleSim Pages (see bottom)](http://wiki.ros.org/turtlesim)
+
+
 ### Using Gazebo
 Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
 - Start the ros-visualization container with a `docker run` (see above)
