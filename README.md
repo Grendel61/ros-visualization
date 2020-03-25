@@ -67,7 +67,7 @@ Start VSCode, if you don't have the VSCode Docker extension, add it. Now in the 
 
   ![](/pics/attach-shell.png)
   
-### Using an existing ROS Service
+### Using ROS Services
 Now that you have completed the steps above, you can launch an existing Ros service or topic. A good example is the [Turtlebot simulation](http://wiki.ros.org/turtlesim). This will require you to open multiple terminal windows. But you will be learning how ROS works. 
 
 The Turtlebot Simulator is already installed, so you can jump in quickly by running it. 
@@ -119,7 +119,7 @@ You should see:
   [ INFO] [1585164731.268737700]: Spawning turtle [turtle1] at x=[5.544445], y=[5.544445], theta=[0.000000]
 ```
 This is shows the name of your turtle "turtle1", and its position and orientation. 
-6. At this point, if you opened a browser window to your container at http://localhost:6901/ you should see a turtlebot like this:
+6. At this point, in your ROS browser window (see above) to your container at http://localhost:6901/ you should see a turtlebot like this:
 
   ![](/pics/turtlebot.png)
 
@@ -190,7 +190,7 @@ This exposes the types:
   ---
   string name
 ```
-So let's create a new Turtle a little above and to the right of our current turtle which is at 0 0 0. On the command line enter:
+So lets create a new Turtle a little above and to the right of our current turtle which is at 0 0 0. On the command line enter:
 ```
   rosservice call /spawn 7 7 0 eddie
 ```
@@ -210,13 +210,47 @@ Now let's remove that turtle, on the command line in your rosservice window ente
 ```
   rosservice call /kill eddie
 ```
-The `/kill` command is listed in your command list on the TurtleSim. If you look at your browser window with the turtles, the "eddie" turtle should be gone. 
+The `/kill` command is listed in your command list on the TurtleSim. If you look at your ROS browser window with the turtles, the "eddie" turtle should be gone. 
 
 Check out these tutorials to learn more about ROS Services:
 
 [Intro Video](https://www.youtube.com/watch?time_continue=480&v=qhnlmrGQVvM&feature=emb_logo)
 
 [TurtleSim Pages (see bottom)](http://wiki.ros.org/turtlesim)
+
+### Using ROS Topics
+Now that we created a ROS Service, lets learn about ROS Topics. We are going to setup teleoperation of the Turtle using Topics. 
+
+Lets begin by adding the capability to drive the Turtle.
+1. In the 3rd terminal window from the tutorial above where you were entering the `rosservice commands, now enter:
+```
+  rosrun turtlesim turtle_teleop_key
+```
+This will show an info box:
+```
+  ros@e52e7c314fb4:~$ rosrun turtlesim turtle_teleop_key
+  Reading from keyboard
+  ---------------------------
+  Use arrow keys to move the turtle. 'q' to quit.
+```
+You can use the arrow keys to drive the turtle around. **IMPORTANT: Make sure you are in the 3rd terminal window where you started the turtle_teleop_key.** Drive it around and you should
+see something like this in your ROS browser window. The turtlesim_node and the turtle_teleop_key node are communicating with each other over a **ROS Topic**.
+
+  ![](/pics/driveturtle.png)
+
+2. The turtlesim_node and the turtle_teleop_key node are communicating with each other over a **ROS Topic**. Now lets see what is happening with the ROS Topics. In your 4th terminal window from above, on the command line open RQT_Graph by entering:
+```
+  rosrun rqt_graph rqt_graph
+```
+Go back to your ROS Browser window and you should see the graph of the topics, like this:
+
+  ![](/pics/turtlebotgraph.png)
+
+If you hover over the graph elements, you will see them change colors. This is an interactive tool that you can use with other tools to manage your ROS Topics. 
+
+Check out more on ROS Topics here:
+
+[Understanding Topics](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics)
 
 ### Using Gazebo
 Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs.
