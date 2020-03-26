@@ -24,7 +24,7 @@ https://hub.docker.com/repository/docker/grendel61/ros-visualization/general
 * Tensorflow GPU
 
 ## User Documentation
-See the ROS Visualization [Wiki](https://github.com/apexsupplychain/ros-visualization/wiki) for more information. 
+See the ROS Visualization [Wiki](https://github.com/Grendel61/ros-visualization/wiki) for more information. 
 
 ## Contributors
 * [ConSol/docker-headless-vnc-container](https://github.com/ConSol/docker-headless-vnc-container) - developed the ConSol/docker-headless-vnc-container
