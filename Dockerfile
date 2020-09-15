@@ -103,7 +103,8 @@ RUN $INST_SCRIPTS/set_user_permission.sh $STARTUPDIR $HOME
 RUN apt-get update && \
     apt-get install -y vim apt-utils \
     tmux \
-    git
+    git \
+    dialog
 
 # Install ROS
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
@@ -148,28 +149,31 @@ RUN rosdep update
 USER root
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
-    apt-get install -y ros-melodic-catkin python-wstool python-catkin-tools clang-format-3.9
+    apt-get install -y ros-melodic-catkin python-catkin-tools && \
+    apt-get install -y ros-melodic-moveit
 
 ## Create Workspace
-RUN mkdir -p ~/ws_moveit && \
-    cd ~/ws_moveit && \
-    wstool init src && \
-    wstool merge -t src https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall && \
-    wstool update -t src && \
-    rosdep install -y --from-paths src --ignore-src --rosdistro melodic && \
+RUN mkdir -p ~/ws_moveit/src
+
+## Download Examples
+RUN cd ~/ws_moveit/src && \
+    rm -rf moveit_tutorials && \
+    rm -rf panda_moveit_config && \
+    git clone https://github.com/ros-planning/moveit_tutorials.git -b melodic-devel && \
+    git clone https://github.com/ros-planning/panda_moveit_config.git -b melodic-devel
+
+## Build Catkin Workspace
+RUN cd ~/ws_moveit/src && \
+    rosdep install -y --from-paths . --ignore-src --rosdistro melodic
+
+## Configure Catkin Workspace
+RUN cd ~/ws_moveit && \
     catkin config --extend /opt/ros/melodic --cmake-args -DCMAKE_BUILD_TYPE=Release && \
     catkin build
 
 ### Source workspace
 RUN echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
 RUN /bin/bash -c "source ~/.bashrc"
-
-## Download Examples
-RUN cd ~/ws_moveit/src && \
-    rm -rf moveit_tutorials && \
-    rm -rf panda_moveit_config && \
-    git clone https://github.com/ros-planning/moveit_tutorials.git -b master && \
-    git clone https://github.com/ros-planning/panda_moveit_config.git -b melodic-devel
 
 # Expose Tensorboard
 EXPOSE 6006
